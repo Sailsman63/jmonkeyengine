@@ -199,13 +199,6 @@ jobs:
             deploy: false 
 
     steps:  
-      - name: Print data
-        shell: bash
-        env:
-          OS_NAME: ${{ matrix.osName }}
-        run: |
-          echo $HOME
-          echo $github.workspace
       - name: Clone the repo
         uses: actions/checkout@v2
         with:
@@ -286,8 +279,8 @@ jobs:
         with:
           name: build-logs  and artifacts
           path: |
-            '~/runner/work/jmonkeyengine/jmonkeyengine/**/build/libs/*'
-            '~/runner/work/jmonkeyengine/jmonkeyengine/**/build/report/tests/test/*'
+            '~/work/jmonkeyengine/jmonkeyengine/**/build/libs/*'
+            '~/work/jmonkeyengine/jmonkeyengine/**/build/report/tests/test/*'
     
       # Used later by DeploySnapshot
       - name: Upload merged natives
