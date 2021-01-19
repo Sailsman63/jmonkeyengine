@@ -279,8 +279,6 @@ jobs:
         with:
           name: built-libs 
           path: ~/runner/work/jmonkeyengine/jmonkeyengine/**/build/libs/*
-        uses: actions/upload-artifact@v2
-        with:
           name: test-reports 
           path: ~/runner/work/jmonkeyengine/jmonkeyengine/**/build/reports/tests/test/*
       # Used later by DeploySnapshot
