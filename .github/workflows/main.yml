@@ -278,9 +278,8 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: ${{ env.name }} logs  and artifacts
-          path: |
-            ${{ github.workspace }}/jmonkeyengine/jmonkeyengine/*/build/libs/
-            ${{ github.workspace }}/jmonkeyengine/jmonkeyengine/*/build/report/tests/test/
+          path: ${{ github.workspace }}/jmonkeyengine/jmonkeyengine/*/build/**
+            
                 
       # Used later by DeploySnapshot
       - name: Upload merged natives
