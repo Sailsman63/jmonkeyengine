@@ -163,7 +163,6 @@ jobs:
           
           # Build
           ./gradlew  -PuseCommitHashAsVersionName=true --no-daemon  -PbuildNativeProjects=true -Dmaven.repo.local="$PWD/dist/maven" \
-          build \
           :jme3-bullet-native:build
                   
       # Upload natives to be used later by the BuildJMonkey job
@@ -180,11 +179,15 @@ jobs:
     name: Build on ${{ matrix.osName }} jdk${{ matrix.jdk }}
     runs-on: ${{ matrix.os }}    
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
-        os: [ubuntu-18.04,windows-2019,macOS-latest]
+        os: [ubuntu-18.04,ubuntu-20.04,ubuntu-16.04,windows-2019,macOS-latest]
         jdk: [8.x.x,11.x.x]
         include:
+          - os: ubuntu-16.04
+            osName: older-linux
+          - os: ubuntu-20.04
+            osName: preview-linux
           - os: ubuntu-18.04
             osName: linux
             deploy: true
@@ -195,7 +198,7 @@ jobs:
           - jdk: 11.x.x
             deploy: false 
 
-    steps:          
+    steps:  
       - name: Clone the repo
         uses: actions/checkout@v2
         with:
@@ -242,7 +245,7 @@ jobs:
         shell: bash
         run: |
           # Build
-          ./gradlew -PuseCommitHashAsVersionName=true -PskipPrebuildLibraries=true build
+          ./gradlew -i -PuseCommitHashAsVersionName=true -PskipPrebuildLibraries=true build
           
           if [ "${{ matrix.deploy }}" = "true" ];
           then  
@@ -270,6 +273,14 @@ jobs:
             echo "Done"
           fi         
 
+      - name: failed-libs logs
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.name }} logs  and artifacts
+          path: ${{ github.workspace }}/jmonkeyengine/jmonkeyengine/*/build/**
+            
+                
       # Used later by DeploySnapshot
       - name: Upload merged natives
         if: matrix.deploy==true
