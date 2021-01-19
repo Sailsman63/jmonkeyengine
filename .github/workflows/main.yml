@@ -279,9 +279,9 @@ jobs:
         with:
           name: ${{ env.name }} logs  and artifacts
           path: |
-            ${{ github.workspace }}/jmonkeyengine/jmonkeyengine/**/build/libs/*
-            ${{ github.workspace }}/jmonkeyengine/jmonkeyengine/**/build/report/tests/test/*
-    
+            ${{ github.workspace }}/jmonkeyengine/jmonkeyengine/**/build/libs/
+            ${{ github.workspace }}/jmonkeyengine/jmonkeyengine/**/build/report/tests/test/
+                
       # Used later by DeploySnapshot
       - name: Upload merged natives
         if: matrix.deploy==true
