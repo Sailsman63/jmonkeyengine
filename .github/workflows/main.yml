@@ -278,9 +278,9 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: build-logs  and artifacts
-          path: 
+          path: |
             '~/runner/work/jmonkeyengine/jmonkeyengine/**/build/libs/*'
-            '~/runner/work/jmonkeyengine/jmonkeyengine/**/build/reports/tests/test/*'
+            '~/runner/work/jmonkeyengine/jmonkeyengine/**/build/report/tests/test/*'
     
       # Used later by DeploySnapshot
       - name: Upload merged natives
