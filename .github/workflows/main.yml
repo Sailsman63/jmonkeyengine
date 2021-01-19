@@ -280,7 +280,7 @@ jobs:
           name: build-logs  and artifacts
           path: 
             '~/runner/work/jmonkeyengine/jmonkeyengine/**/build/libs/*'
-            '~/runner/work/jmonkeyengine/jmonkeyengine/**/build/reports/tests/test/*
+            '~/runner/work/jmonkeyengine/jmonkeyengine/**/build/reports/tests/test/*'
     
       # Used later by DeploySnapshot
       - name: Upload merged natives
