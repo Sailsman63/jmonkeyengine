@@ -198,7 +198,14 @@ jobs:
           - jdk: 11.x.x
             deploy: false 
 
-    steps:          
+    steps:  
+      - name: Print data
+        shell: bash
+        env:
+          OS_NAME: ${{ matrix.osName }}
+        run: |
+          echo $HOME
+          echo $github.workspace
       - name: Clone the repo
         uses: actions/checkout@v2
         with:
