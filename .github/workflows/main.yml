@@ -277,10 +277,10 @@ jobs:
         if: ${{ failure() }}
         uses: actions/upload-artifact@v2
         with:
-          name: build-logs  and artifacts
+          name: ${{ env.name }} logs  and artifacts
           path: |
-            '~/work/jmonkeyengine/jmonkeyengine/**/build/libs/*'
-            '~/work/jmonkeyengine/jmonkeyengine/**/build/report/tests/test/*'
+            ${{ HOME }}/work/jmonkeyengine/jmonkeyengine/**/build/libs/*
+            ${{ HOME }}/work/jmonkeyengine/jmonkeyengine/**/build/report/tests/test/*
     
       # Used later by DeploySnapshot
       - name: Upload merged natives
