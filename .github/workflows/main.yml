@@ -116,10 +116,10 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: [ubuntu-20.04,windows-2019,macOS-latest] 
+        os: [ubuntu-18.04,windows-2019,macOS-latest] 
         jdk: [8.x.x]
         include:
-          - os: ubuntu-20.04
+          - os: ubuntu-18.04
             osName: linux
           - os: windows-2019
             osName: windows
@@ -273,6 +273,16 @@ jobs:
             echo "Done"
           fi         
 
+      - name: failed-logs
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: built-libs 
+          path: ~/runner/work/jmonkeyengine/jmonkeyengine/**/build/libs/*
+        uses: actions/upload-artifact@v2
+          with:
+            name: test-reports 
+            path: ~/runner/work/jmonkeyengine/jmonkeyengine/**/build/reports/tests/test/*
       # Used later by DeploySnapshot
       - name: Upload merged natives
         if: matrix.deploy==true
